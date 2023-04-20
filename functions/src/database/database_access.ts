@@ -31,9 +31,6 @@ export const getUser = async (user: User) => {
   if (docSnap.exists()) {
     return docSnap.data();
   } else {
-    await newUser(user);
-    const createdUser = doc(dbConnection, "users", user.google_id);
-    const newRef = await getDoc(createdUser);
-    return newRef.data();
+    return undefined;
   }
 };
