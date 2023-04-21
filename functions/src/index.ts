@@ -1,5 +1,12 @@
 import { Express } from "express";
-import { getAllUsers, newUser } from "./database/database_access";
+import {
+    addTaskToProject,
+  getAllUsers,
+  getUser,
+  getUserProjects,
+  newProject,
+  newUser,
+} from "./database/database_access";
 var express = require("express");
 const functions = require("firebase-functions");
 
@@ -32,7 +39,48 @@ app.post("/users", async (req, res) => {
   const user = req.body;
   try {
     await newUser(user);
-    res.status(204).end();
+    res.status(201).end();
+  } catch (e) {
+    res.status(500).send({ message: e });
+  }
+});
+
+app.get("/users/:google_id", async (req, res) => {
+  const id = req.params.google_id;
+  try {
+    const user = await getUser(id);
+    res.status(200).send(user);
+  } catch (e) {
+    res.status(500).send({ message: e });
+  }
+});
+
+app.post("/projects", async (req, res) => {
+  const project = req.body;
+  try {
+    const newP = await newProject(project);
+    res.status(201).send(newP);
+  } catch (e) {
+    res.status(500).send({ message: e });
+  }
+});
+
+app.post("/projects/:projectId", async (req, res) => {
+  const projectId = req.params.projectId;
+  const task = req.body;
+  try {
+    await addTaskToProject(task, projectId);
+    res.status(201).end();
+  } catch (e) {
+    res.status(500).send({ message: e });
+  }
+});
+
+app.get("/projects/:google_id", async (req, res) => {
+  const id = req.params.google_id;
+  try {
+    const projects = await getUserProjects(id);
+    res.status(200).send(projects);
   } catch (e) {
     res.status(500).send({ message: e });
   }
