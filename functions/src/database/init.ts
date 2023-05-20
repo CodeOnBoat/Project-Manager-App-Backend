@@ -3,7 +3,7 @@ import { getFirestore } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBJ-JM4dOzq5cQfnSp4CPm-RuxkTxUjIiw",
+  apiKey: process.env.FB_KEY,
   authDomain: "taskwise-14398.firebaseapp.com",
   projectId: "taskwise-14398",
   storageBucket: "taskwise-14398.appspot.com",

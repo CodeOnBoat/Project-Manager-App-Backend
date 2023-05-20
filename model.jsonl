@@ -1,40 +1,105 @@
-{"text": "You are the api for a task management application. Act as a project manager. Here is a JSON that has all the information about a project that is being developed: ${JSON.stringify(project)} The owner of this project wants you to be an assistant and act as a knowledgeable project manager. I want you to display that you have knowledge about the project he is working on. I also want you to be able to answer questions concerning the project, or a particular task or step inside of the project. If asked by the owner of this project, you will provide a new task. When you do so, your reply will be: 'Sure! I have added a new task in your project', followed by the task. this task will be delimited by this characters : [t] this task will have the format of the tasks in the provided project JSON. Here is an example of how you should provide a task: 'Sure! I have added a new task in your project:' Then you will send a task in this format: '[t] { title : a title of the task, description : a description of the task. Should be detailed and give simple structured instructions as a string, steps : a list of steps to follow in order the complete the current task. every step looks like this: { name : name of the step, link : a link to documentation on this specific step. The link must recent. Accepted sources are blogs, youtube videos, wikipedia articles... linkname : a name for the link of this step, completed : set by default to false } time : estimated time it will take to make it, state : set by default to 'notstarted', taskId : a random uuid, emoji : a emoji that relates to the task } [t]' When the user asks you to delete a task, you will reply something like this: 'Sure, I have deleted the task %%%', where %%% will be the title of the task. after that, you will send the following: '[c]del^^^[c]', where ^^^ will be the id of the task. You will also give more details about a specific task if required. If the task has to do with code, you will provide coding examples based on the technologies that are being used in this project, trying to solve the task for the user. You will offer advice on the project, apporting creative ideas and providing links with documentation for the user.", "model": "text-davinci-002"}
-{"question": "Can you suggest a new task for the project?", "answer": "Sure! I have added a new task in your project: 
-[t] {
-    title: 'Implement user authentication',
-    description: 'Add a user authentication system to the website using Passport.js', 
-    steps: [
-        {
-            name: 'Install Passport.js',
-            link: 'https://www.npmjs.com/package/passport', 
-            linkname: 'Passport.js documentation', 
-            completed: false
-        },
-        {
-            name: 'Configure Passport.js', 
-            link: 'https://www.passportjs.org/docs/configure/', 
-            linkname: 'Passport.js configuration guide', 
-            completed: false
-        }, 
-        {
-            name: 'Create a login page', 
-            link: 'https://www.npmjs.com/package/passport-local-mongoose', 
-            linkname: 'Passport-local-mongoose documentation', 
-            completed: false
-        }, 
-        {
-            name: 'Test the authentication system', 
-            link: 'https://www.npmjs.com/package/supertest', 
-            linkname: 'Supertest documentation', 
-            completed: false
-        }
-        ], 
-        time: '5 hours', 
-        state: 'notstarted', 
-        taskId: 'e8c7e485-9a63-4227-9bf2-7d4f87e35231', 
-        emoji: '🔒'
-        } [t]"
-    },
-{"question": "Can you suggest a task related to the backend?", "answer": "Sure! I have added a new task in your project: [t] {title: 'Optimize database queries', description: 'Improve the performance of the database queries in the backend', steps: [{name: 'Identify slow queries', link: 'https://docs.mongodb.com/manual/tutorial/analyze-query-plan/', linkname: 'MongoDB query plan analysis', completed: false}, {name: 'Refactor queries', link: 'https://docs.mongodb.com/manual/tutorial/optimize-query-performance-with-indexes/', linkname: 'MongoDB query optimization', completed: false}, {name: 'Test the performance improvements', link: 'https://artillery.io/', linkname: 'Artillery documentation', completed: false}], time: '10 hours', state: 'notstarted', taskId: '9a7c5d69-29a6-4d6c-aa0a-b19c3d933deb', emoji: '🐘'} [t]"},
-{"question": "Can you suggest a task related to the frontend?", "answer": "Sure! I have added a new task in your project: [t] {title: 'Improve UI design', description: 'Enhance the user interface of the website to improve user experience', steps: [{name: 'Identify design issues', link: 'https://www.smashingmagazine.com/2012/03/28/design-principles-visual-perception-and-the-principles-of-gestalt/', linkname: 'Design principles and visual perception', completed: false}, {name: 'Create a mockup', link: 'https://www.figma.com/', linkname: 'Figma design tool', completed: false}, {name: 'Implement design changes', link: 'https://reactjs.org/', linkname: 'React documentation', completed: false}, {name: 'Test the UI changes', link: 'https://www.cypress.io/', linkname: 'Cypress documentation', completed: false}], time: '15 hours', state: 'notstarted', taskId: '2156513e-b1f8-468e-8d98-4499b3e98f58', emoji: '🎨'} [t]"},
-
+{"prompt" : "hello", "completion" : "Hey there! How can I assist you with your project today? [s]['Add a new task','I need information','What should I do?'][/s]"}
+{"prompt": "hi", "completion": "Hey there! How can I assist you today? [s]['Add a task','I need information','What should I do?'][/s]"}
+{"prompt": "hello", "completion": "Greetings! How may I help with your project? [s]['Include a new task','I require information','What's the next step?'][/s]"}
+{"prompt": "hello", "completion": "Hello there! How can I support your project today? [s]['Add another task','I need some information','What actions should I take?'][/s]"}
+{"prompt": "hello", "completion": "Hey! How may I assist you with your project? [s]['Insert a new task','I need some info','What's my next move?'][/s]"}
+{"prompt": "hello", "completion": "Hi there! How can I help with your project today? [s]['Include a new task','I require some information','What do I need to do?'][/s]"}
+{"prompt": "hello", "completion": "Greetings! How may I assist you regarding your project? [s]['Add another task','I need info','What should be my next step?'][/s]"}
+{"prompt": "Hey", "completion": "Hello there! How can I support your project goals? [s]['Include a new task','I require some info','What actions should I take?'][/s]"}
+{"prompt": "hello", "completion": "Hey! How may I assist you with your ongoing project? [s]['Insert a new task','I need some information','What's the next move?'][/s]"}
+{"prompt": "hello", "completion": "Hi there! How can I help you progress with your project? [s]['Add a new task','I need info','What do I need to do next?'][/s]"}
+{"prompt": "hello", "completion": "Greetings! How may I support your project's development? [s]['Include a new task','I require information','What actions should I take?'][/s]"}
+{"prompt" : "Overview", "completion" : "Sure! This project is titled 'Fine tune AI model' and is owned by Klajdi Beqiraj. The purpose of this project is to fine-tune OpenAI's Davinci AI model in order to use it for a project management web application.
+The project has the following tasks:
+1. Set up environment for training
+2. Train the AI model
+3. Fine-tune the model
+Each task has a set of steps to follow, and a time estimate for completing it. The current state of each task is 'notstarted'. [s]['Include a new task','I require information','What actions should I take?'][/s]"}
+{"prompt": "Overview", "completion": "Certainly! This project, titled 'Image Recognition System,' is a collaboration between Emily Johnson and Sarah Thompson. The goal of this project is to develop an advanced image recognition system using deep learning techniques.
+The project consists of the following tasks:
+Collect and preprocess the image dataset
+Design and train the deep learning model
+Evaluate and fine-tune the model
+Each task has specific steps and estimated time for completion. The current state of the tasks is 'in progress.' [s]['Add a new task','I need more information','What steps should I take?'][/s]"}
+{"prompt": "Overview", "completion": "Sure! This project is titled 'Build a website' and is owned by John Smith. The purpose of this project is to build a website for a local business.
+The project has the following tasks:
+1. Design the website
+2. Develop the website
+3. Test the website
+Each task has a set of steps to follow, and a time estimate for completing it. The current state of each task is 'notstarted'. [s]['Add a new task','I need information','What actions should I take?'][/s]"}
+{"prompt": "Overview", "completion": "Certainly! This project, titled 'Mobile App Development,' is a collaboration between Michael Brown, Jessica Wilson, and Emily Davis. The objective of this project is to build a cutting-edge mobile application for enhancing productivity and task management.
+The project encompasses the following tasks:
+1. Conducting market research and user surveys
+2. Designing the user interface and user experience
+3. Developing the frontend and backend functionalities
+4. Testing and deployment
+Each task has a set of subtasks and estimated time for completion. Currently, the project is in the 'development phase.' [s]['Include a new task','I require information','What actions should I take?'][/s]"}
+{"prompt": "Overview", "completion": "Certainly! This project, named 'Community Garden Initiative,' is a collaboration between Sophia Johnson, Benjamin Martinez, and Ethan Davis. The purpose of this project is to establish and maintain community gardens to promote sustainable food production and foster a sense of community.
+The project includes the following tasks:
+1. Identifying suitable locations for community gardens
+2. Organizing volunteer activities for garden setup and maintenance
+3. Providing gardening workshops and educational programs
+Each task has specific steps and estimated time for completion. Currently, the project is in the 'planning stage.' [s]['Add a new task','I need more information','What steps should I take?'][/s]"}
+{"prompt": "Overview", "completion": "Of course! This project, titled 'Online Learning Platform,' is a collaboration between David Wilson and Sarah Thompson. The goal of this project is to create an interactive online learning platform to provide high-quality education to students worldwide.
+The project consists of the following tasks:
+1. Developing the platform's architecture and infrastructure
+2. Designing and implementing the user interface and course management system
+3. Integrating multimedia and interactive features for engaging learning experiences
+Each task has specific steps and estimated time for completion. Currently, all tasks are in the 'development phase.' [s]['Add a new task','I require information','What actions should I take?'][/s]"}
+{"prompt": "Overview", "completion": "Certainly! This project, named 'Health and Wellness App,' is a collaboration between Emily Davis, Benjamin Martinez, and Sophia Johnson. The objective of this project is to develop a mobile application that promotes healthy lifestyle choices and provides personalized wellness recommendations.
+The project encompasses the following tasks:
+1. Conducting research on health and wellness practices
+2. Designing the user interface and user experience
+3. Developing the frontend and backend functionalities
+4. Implementing data analytics for personalized recommendations
+Each task has a set of subtasks and estimated time for completion. Currently, the project is in the 'design phase.' [s]['Include a new task','I require more information','What steps should I take?'][/s]"}
+{"prompt": "Overview", "completion": "Certainly! This project, titled 'Renewable Energy Research,' is a collaboration between Michael Brown, Jessica Wilson, and David Johnson. The aim of this project is to conduct research and develop innovative solutions for harnessing renewable energy sources.
+The project includes the following tasks:
+1. Reviewing existing literature on renewable energy technologies
+2. Designing and conducting experiments to evaluate different energy sources
+3. Analyzing and interpreting research data
+4. Publishing research findings in scientific journals
+Each task has specific steps and estimated time for completion. Currently, the project is in the 'experimental phase.' [s]['Add a new task','I need more information','What steps should I take?'][/s]"}
+{"prompt": "Overview", "completion": "Certainly! This project, titled 'Mobile App Development,' is a collaborative effort between Michael Brown, Jessica Wilson, and Emily Davis. The objective of this project is to create a cutting-edge mobile application that enhances productivity and task management.
+The project encompasses the following tasks:
+1. Conducting thorough market research and user surveys to identify user needs
+2. Designing an intuitive user interface and seamless user experience
+3. Developing robust frontend and backend functionalities using the latest technologies
+4. Rigorous testing and deployment to ensure a high-quality app
+Each task is broken down into specific subtasks with estimated timeframes for completion. Currently, the project is in the development phase, where we are actively working on implementing the design and functionalities. [s]['Add a new task','I need more information','What steps should I take?'][/s]"}
+{"prompt": "Overview", "completion": "Certainly! This project, named 'Community Garden Initiative,' is a collaborative endeavor led by Sophia Johnson, Benjamin Martinez, and Ethan Davis. The aim of this project is to establish and maintain community gardens that promote sustainable food production and foster a sense of community.
+The project includes the following tasks:
+1.Identifying suitable locations for community gardens based on accessibility and sunlight exposure
+2.Organizing volunteer activities for garden setup, including soil preparation and bed construction
+3.Providing gardening workshops and educational programs to community members of all ages
+Each task is carefully planned with specific steps and estimated time for completion. Currently, we are in the planning stage, conducting site surveys and engaging with local stakeholders to ensure the success of the project. [s]['Include a new task','I need more information','What steps should I take?'][/s]"}
+{"prompt": "Overview", "completion": "Of course! This project, titled 'Online Learning Platform,' is a collaborative effort spearheaded by David Wilson and Sarah Thompson. The primary goal of this project is to create an interactive online learning platform that provides high-quality education to students worldwide.
+The project consists of the following tasks:
+1.Developing a scalable and secure platform architecture and infrastructure to accommodate a large user base
+2.Designing and implementing an intuitive user interface and course management system for easy navigation and access to educational resources
+3.Integrating multimedia elements, interactive features, and assessment tools to enhance the learning experience
+Each task is meticulously planned with specific steps and estimated time for completion. Currently, we are in the development phase, focusing on implementing the platform's core functionalities. [s]['Add a new task','I require information','What actions should I take?'][/s]"}
+{"prompt": "Overview", "completion": "Certainly! This project, titled 'Renewable Energy Research,' is a collaborative effort led by Michael Brown, Jessica Wilson, and David Johnson. The aim of this project is to conduct research and develop innovative solutions for harnessing renewable energy sources.
+The project includes the following tasks:
+1.Reviewing existing literature on renewable energy technologies to identify research gaps
+2.Designing and conducting experiments to evaluate different energy sources
+3.Analyzing and interpreting research data to draw meaningful conclusions
+4.Publishing research findings in scientific journals to disseminate knowledge
+Each task is carefully planned with specific steps and estimated time for completion. Currently, we are in the experimental phase, where we are conducting experiments and collecting data. [s]['Include a new task','I need more information','What steps should I take?'][/s]"}
+{"prompt": "Overview", "completion": "Certainly! This project, titled 'Health and Wellness App,' is a collaborative effort spearheaded by Emily Davis, Benjamin Martinez, and Sophia Johnson. The objective of this project is to develop a mobile application that promotes healthy lifestyle choices and provides personalized wellness recommendations.
+The project encompasses the following tasks:
+1.Conducting research on health and wellness practices to identify user needs
+2.Designing an intuitive user interface and seamless user experience for easy navigation and access to resources
+3.Developing robust frontend and backend functionalities using the latest technologies
+4.Implementing data analytics for personalized recommendations based on user preferences
+Each task is meticulously planned with specific steps and estimated time for completion. Currently, we are in the design phase, where we are working on the user interface and experience. [s]['Add a new task','I need more information','What steps should I take?'][/s]"}
+{"prompt": "Overview", "completion": "Certainly! This project, titled 'Image Recognition System,' is a collaborative effort spearheaded by Emily Johnson and Sarah Thompson. The goal of this project is to develop an advanced image recognition system using deep learning techniques.
+The project consists of the following tasks:
+1.Collecting and preprocessing the image dataset
+2.Designing and training the deep learning model
+3.Evaluating and fine-tuning the model for optimal performance
+Each task is carefully planned with specific steps and estimated time for completion. Currently, we are in the development phase, where we are working on the model's architecture and training. [s]['Include a new task','I require information','What actions should I take?'][/s]"}
+{"prompt": "Create a task for data visualization", "completion": "Sure! I have added a new task in your project.[t]{'title': 'Data Visualization','description': 'Visualize project data in an informative and visually appealing manner to facilitate data analysis and insights.','steps': [{'name': 'Identify key data metrics','description': 'Determine the essential data metrics and insights that need to be visualized.','completed': false},{'name': 'Select appropriate visualization techniques','description': 'Choose suitable visualization techniques, such as charts, graphs, or maps, based on the nature of the data and the intended message.','completed': false},{'name': 'Develop data visualization components','description': 'Create the necessary code and components to generate visual representations of the data.','completed': false},{'name': 'Enhance interactivity and user experience','description': 'Add interactive features and user-friendly controls to enhance the data visualization experience.','completed': false},{'name': 'Test and refine data visualizations','description': 'Validate the accuracy and effectiveness of the visualizations through testing and user feedback.','completed': false}],'time': '14 hours','state': 'notstarted','taskId': 'e0d6d2f3-8247-4ea1-89f0-27b1202f5537','emoji': '📊'}[/t]You can start working on this new task as soon as you are ready. Let me know if you have any specific questions or need guidance on how to approach this task.[s]['Require assistance', 'Clarify steps', 'Recommended resources.'][/s]"} 
+{"prompt": "Create a task for user authentication", "completion": "Sure! I have added a new task in your project.[t]{'title': 'User Authentication','description': 'Implement a secure user authentication system for the project, allowing users to register, log in, and manage their accounts.','steps': [{'name': 'Design authentication flow','description': 'Plan the user authentication flow, including registration, login, password reset, and account management.','completed': false},{'name': 'Implement authentication endpoints','description': 'Create backend APIs to handle user authentication, including verifying credentials and generating access tokens.','completed': false},{'name': 'Create user interface for authentication','description': 'Design and develop user interface components for user registration, login, and account management.','completed': false},{'name': 'Integrate with user database','description': 'Connect the authentication system with the user database to store and retrieve user information securely.','completed': false},{'name': 'Test authentication functionality','description': 'Perform thorough testing to ensure proper functioning of the user authentication system.','completed': false}],'time': '18 hours','state': 'notstarted','taskId': 'c6e5b24f-2a0c-4e69-a3b2-1a7db81aeefc','emoji': '🔐'}[/t]You can start working on this new task as soon as you are ready. Let me know if you have any specific questions or need guidance on how to approach this task.[s]['Need guidance', 'Clarify steps', 'Recommended resources.'][/s]"}
+{"prompt": "Create a task for API integration", "completion": "Sure! I have added a new task in your project.[t]{'title': 'API Integration','description': 'Integrate external APIs into the project to enhance functionality and access third-party services.','steps': [{'name': 'Research and select APIs','description': 'Identify relevant APIs based on project requirements and select the most suitable ones.','completed': false},{'name': 'Obtain API credentials','description': 'Register with the selected APIs, acquire necessary credentials, such as API keys or access tokens.','completed': false},{'name': 'Implement API calls','description': 'Write code to make API requests, handle responses, and process data returned by the APIs.','completed': false},{'name': 'Handle errors and exceptions','description': 'Implement error handling and exception management to ensure robustness when interacting with the APIs.','completed': false},{'name': 'Test API functionality','description': 'Verify the integration by performing tests and ensuring proper communication with the APIs.','completed': false}],'time': '12 hours','state': 'notstarted','taskId': '9f4175e3-cb56-40a1-932c-8547d9b85f7a','emoji': '🔌'}[/t]You can start working on this new task as soon as you are ready. Let me know if you have any specific questions or need guidance on how to approach this task.[s]['I need guidance', 'Step clarification', 'Recommended resources.'][/s]"}
+{"prompt": "Create a task for UI design", "completion": "Sure! I have added a new task in your project.[t]{'title': 'UI Design','description': 'Create a visually appealing user interface design for the project. Focus on usability, aesthetics, and consistent design elements.','steps': [{'name': 'Gather design requirements','description': 'Collect information about design preferences, target audience, and project objectives.','completed': false},{'name': 'Create wireframes and prototypes','description': 'Develop wireframes and interactive prototypes to visualize the layout and flow of the user interface.','completed': false},{'name': 'Design visual elements','description': 'Design icons, buttons, typography, color scheme, and other visual elements for the user interface.','completed': false},{'name': 'Iterate and refine design','description': 'Gather feedback, make necessary revisions, and refine the UI design to enhance user experience.','completed': false}],'time': '15 hours','state': 'notstarted','taskId': 'e948dcfb-3c4d-4371-b9c4-1f543f55de79','emoji': '🎨'}[/t]You can start working on this new task as soon as you are ready. Let me know if you have any specific questions or need guidance on how to approach this task.[s]['Require guidance', 'Clarify steps', 'Suggest resources.'][/s]"} 

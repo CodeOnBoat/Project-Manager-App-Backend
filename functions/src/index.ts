@@ -18,6 +18,7 @@ import {
 } from "./database/database_access";
 import { addProjectToUser } from "./database/database_access";
 import { chatWithProjectAssistant } from "./openIA/openIA";
+import { extractSuggestionsFromResponse, extractTaskFromResponse } from "./utils/utils";
 var express = require("express");
 const functions = require("firebase-functions");
 
@@ -93,9 +94,14 @@ app.post("/projects/chatbox", async (req, res) => {
 
   try {
     const newP = await chatWithProjectAssistant(project, query, messageHistory);
-    res.status(201).send(newP);
+    const task = await extractTaskFromResponse(project,newP);
+    if(task) {
+      addTaskToProject(task, project.project_id);
+    }
+    const finalRes = extractSuggestionsFromResponse(newP);
+    res.status(201).send(finalRes);
   } catch (e) {
-    res.status(500).send({ message: e });
+    res.status(500).send({ message: `error ${e}`  });
   }
 });
 
@@ -175,7 +181,7 @@ app.patch(`/projects/:projectId/users/:userId`, async (req, res) => {
   }
 });
 
-app.patch(`/projects/sendnotification`, async (req, res) => {
+app.patch(`/sendnotification`, async (req, res) => {
   const { sender_username, collaborator_mail, project_id } = req.body;
 
   try {

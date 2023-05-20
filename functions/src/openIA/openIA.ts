@@ -1,18 +1,22 @@
 import axios from "axios";
 import { Project } from "../types/types";
+import { infoToDB } from "../utils/utils";
 
 const sendPrompt = async (
   prompt: string,
   messages: { role: string; content: string }[]
 ) => {
-  const key = "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";
+  const key = process.env.OPEN_AI_KEY;
   const client = axios.create({
     headers: { Authorization: "Bearer " + key },
   });
+
+  infoToDB({ content: [...messages, { role: "user", content: prompt }] });
   const res = await client.post("https://api.openai.com/v1/chat/completions", {
     model: "gpt-3.5-turbo",
     messages: [...messages, { role: "user", content: prompt }],
   });
+  infoToDB(res);
   return res.data.choices[0].message.content;
 };
 
@@ -59,19 +63,12 @@ export const chatWithProjectAssistant = async (
   messageHistory: { role: string; content: string }[]
 ) => {
   const setUp = `You are the api for a task management application.
-  Act as a project manager.
   Here is a JSON that has all the information about a project that is being developed: ${JSON.stringify(
     project
   )}
-  The owner of this project wants you to be an assistant and act as a knowledgable project manager.
-  You, as an API, have to respond always in the same format. The format is a JSON with the following properties:
-  {
-    text : Your text response to the previous message,
-    suggestions : a list of suggestions that the user can click on to continue the conversation. The suggestions are strings,
-    action : An action that you want the system to perform. This will give you the capability of adding, removing, and updating project tasks. The possible commands for the system are 'add', 'modify', 'update'. When there is no action to be performed by the system, it will be an empty string.
-  }
-  I want you to display that you have knowledge about the project he is working on.
-  I also want you to be able to answer questions concerning the project, or a particular task or step inside of the project.
+  You will act like an experienced project assistant with knowledge on the topic.
+  You will answer questions concerning the project, or a particular task or step inside of the project, giving guidance, information, and assistance to the user so that he can complete them.
+  You will come up with creative and realistic ideas when you are asked. And offer to create new tasks if you come up with one that is necessary.
   If asked, you will provide a new task. When you do so, your reply will be: 'Sure! I have added a new task in your project', followed by the task. this task will be enclosed in [t].
   Example of task: 
   [t]
@@ -88,12 +85,25 @@ export const chatWithProjectAssistant = async (
     taskId : a random uuid,
     emoji : a emoji that relates to the task
   }
-  [t]
-  You will also give more details about a specific task if required.
-  You will offer advice on the project, apporting creative ideas and providing links with documentation for the user.
+  [/t]
+
+  Every message should be followed by three suggestions, each suggestion consisting of a maximum of three words. These suggestions will guide the user on what they can respond next. Enclose the suggestions array within [s][/s] tags.
+  Example of suggestions:
+  [s]
+    [
+      "Explain me more",
+      "Create new task",
+      "Suggest next step"
+    ]
+  [/s]
+  
   Following this message will come your conversation with the owner of this project.`;
   return await sendPrompt(userInput, [
     { role: "system", content: setUp },
     ...messageHistory,
   ]);
+  // {user : 'Hello', assistant : 'Hello, how can I help you?' [s]["Explain me more", "Create new task", "Suggest next step"][/s]}
+  // {user : 'Hello', assistant : 'Ahoy!, how can I assist you?' [s]["Explain me more", "Create new task", "Suggest next step"][/s]}
+  // {user : 'Hi', assistant : 'Hi, how can I help you?' [s] ["Explain me more", "Create new task", "Suggest next step"][/s]}
+  // {user : 'Create a task to make a express server', assistant : 'Of course! I have added this task to your project: [t]{"title": "Create an Express server","description": "Set up and configure an Express server to serve as the backend for your TaskWise application.","steps": [{"name": "Install Express","description": "Use npm to install the Express package for your project.","completed": false},{"name": "Set up server.js","description": "Create a new file named server.js in the root of your project directory. In this file, import Express (require('express')) and create a new instance of the app using 'const app = express();'.","completed": false},{"name": "Define routes","description": "Define the routes of your application using app.get(), app.post(), app.put(), and app.delete().","completed": false},{"name": "Test your server","description": "Start the server using 'app.listen()' and test that you can access the APIs from a web browser or a client-side application.","completed": false}],"time": 3,"state": "notstarted","taskId": "b3816fc6-a36a-4cc4-8c1b-86b1a935f3d6","emoji": "🌐"}[/t] Feel free to ask me any questions about the task or the steps. [s]['Explain first step','Explain the task','Create new task'][/s]'}
 };
